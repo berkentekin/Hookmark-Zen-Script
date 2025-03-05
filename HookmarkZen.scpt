@@ -1,6 +1,3 @@
---- Add script to Hookmark > Settings > Scripts > (add Zen Browser) > Get Address
---- Made with DeepSeek R1
-
 use scripting additions
 use framework "AppKit"
 
@@ -23,7 +20,7 @@ end repeat
 -- Focus Zen Browser and retrieve window title
 tell application "Zen"
   activate
-  delay 0.2 -- Allow time for window focus
+  -- delay 0.2 -- Allow time for window focus
   set myName to name of front window
 end tell
 
@@ -38,9 +35,12 @@ tell application "System Events"
     on error
       -- Fallback: Use clipboard copy method
       keystroke "l" using command down -- Focus address bar
-      delay 0.1
+      -- delay 0.1
       keystroke "c" using command down -- Copy URL
-      delay 0.2
+      -- delay 0.1
+	  tell application "System Events"
+        key code 53 -- Esc
+	  end tell
       set theUrl to (the clipboard as text)
     end try
   end tell
