@@ -30,8 +30,7 @@ tell application "System Events"
   tell process "Zen"
     -- Check for the address bar UI element (adjust hierarchy as needed)
     try
-      set addressBar to text field 1 of group 1 of toolbar "Navigation" of group 1 of front window
-      set theUrl to value of addressBar
+      set theUrl to get value of UI element 1 of combo box 1 of toolbar "Navigation" of first group of first group of front window of application process "Zen"
     on error
       -- Fallback: Use clipboard copy method
       keystroke "l" using command down -- Focus address bar
@@ -48,7 +47,7 @@ end tell
 
 -- Construct Markdown link
 if theUrl is not "" then
-  return "[«" & myName & "»](" & theUrl & ")"
+	return ("[" & myName & "](" & theUrl) & ")"
 else
   return "Failed to retrieve URL"
 end if
